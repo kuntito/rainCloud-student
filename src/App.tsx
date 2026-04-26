@@ -1,4 +1,5 @@
 import { Box } from "@chakra-ui/react"
+import HomeScreen from "./ui/screens/HomeScreen"
 
 function App() {
 
@@ -9,6 +10,7 @@ function App() {
         display={"flex"}
         flexDirection={"column"}
     >
+        <HomeScreen />
     </Box>
   )
 }

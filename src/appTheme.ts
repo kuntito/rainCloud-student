@@ -28,7 +28,7 @@ const textStyles = {
         fontSize: "24px",
         fontWeight: "normal",
     },
-    modu: {
+    onaregz: {
         fontSize: "14px",
         fontWeight: "normal",
     },
