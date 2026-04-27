@@ -3,6 +3,7 @@ import CourseTitle from "./CourseTitle"
 import CourseDescParagraph from "./CourseDescParagraph";
 import { Course } from "../../../../../models/course";
 import AppButton from "../../../../components/AppButton";
+import useAppStore from "../../../../../state-management/appStore";
 
 interface Props {
     course: Course;
@@ -11,6 +12,9 @@ interface Props {
 const CourseItem = (
     { course }: Props
 ) => {
+
+    const startCourse = useAppStore(s => s.startCourse);
+
     return (
         <VStack
             borderRadius={"16px"}
@@ -33,7 +37,9 @@ const CourseItem = (
                     />
                 ))}
             </VStack>
-            <AppButton>
+            <AppButton
+                onClick={() => startCourse(course.id)}
+            >
                 start course
             </AppButton>
         </VStack>

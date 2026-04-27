@@ -2,6 +2,7 @@ import { Flex, VStack } from "@chakra-ui/react"
 import AppHeader from "../../components/AppHeader"
 import useAppStore from "../../../state-management/appStore"
 import CourseList from "./components/CourseList";
+import OngoingCourseFrame from "./components/ongoing-course/OngoingCourseFrame";
 
 const CourseScreen = () => {
     const selectedCourse = useAppStore(s => s.selectedCourse);
@@ -11,17 +12,23 @@ const CourseScreen = () => {
     return (
         <VStack
             gap={0}
-            w={"100vw"}
-            h={"100vh"}
+            w={"100%"}
+            h={"100%"}
         >
             <AppHeader />
             <Flex
                 flexDirection={"column"}
                 w={"100%"}
                 h={"100%"}
-                justifyContent={"center"}
+                justifyContent={"flex-start"}
+                flex={1}
+                overflow={"hidden"}
             >
-                {selectedCourse ? null : <CourseList courses={courses} />}
+                {
+                    selectedCourse 
+                        ? <OngoingCourseFrame course={selectedCourse} />
+                        : <CourseList courses={courses} />
+                    }
                 
             </Flex>
         </VStack>

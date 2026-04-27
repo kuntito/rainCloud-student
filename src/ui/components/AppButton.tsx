@@ -16,6 +16,7 @@ const AppButton = ({ ...buttonProps }: Props) => {
             _active={{
                 opacity: 0.5,
             }}
+            flexShrink={0}
             {...buttonProps} 
         />
     );
