@@ -3,6 +3,7 @@ import { extendTheme } from "@chakra-ui/react"
 const colors = {
     palette: {
         arduino: "#FFFFFF",
+        arduinoTransparent: "#FFFFFF33", // 33 is 20% opacity
         esp: "#8D8D8D",
         pandas: "#3D3D3D",
         regression: "#111111",
