@@ -1,25 +1,42 @@
-import { Box, VStack, Image } from "@chakra-ui/react"
+import { Box, VStack, Image, Flex } from "@chakra-ui/react"
 import SignInForm from "../components/SignInForm"
 
 const HomeScreen = () => {
     return (
-        <VStack
+        <Flex
             w={"100vw"}
             h={"100vh"}
+            flexDirection={{
+                base: "column",
+                md: "row",
+            }}
             justifyContent={"center"}
         >
             <VStack
-                gap={"24px"}
-            >
+                w={{
+                    base: "100%", 
+                }}
+                justifyContent={"center"}
+                >
                 <Image 
                     src="rain_logo.png"
-                    width={"80px"}
-                    height={"80px"}
+                    boxSize={{
+                        base: "80px",
+                        md: "256px"
+                    }}
                     border={"1px solid palette.arduino"}
-                />
+                    />
+            </VStack>
+            <VStack
+                w={{
+                    base: "100%", 
+                }}
+                justifyContent={"center"}
+                pt={"24px"}
+            >
                 <SignInForm />
-            </VStack>  
-        </VStack>
+            </VStack>
+        </Flex>
     )
 }
 
