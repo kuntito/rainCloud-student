@@ -1,8 +1,8 @@
 import { VStack, Text } from "@chakra-ui/react"
 import CourseTitle from "./CourseTitle"
-import { Course } from "../../../models/course";
 import CourseDescParagraph from "./CourseDescParagraph";
-import AppButton from "../AppButton";
+import { Course } from "../../../../../models/course";
+import AppButton from "../../../../components/AppButton";
 
 interface Props {
     course: Course;
