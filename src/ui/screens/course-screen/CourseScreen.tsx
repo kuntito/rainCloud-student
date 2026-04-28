@@ -1,8 +1,8 @@
 import { Flex, VStack } from "@chakra-ui/react"
 import AppHeader from "../../components/AppHeader"
 import useAppStore from "../../../state-management/appStore"
-import CourseList from "./components/CourseList";
-import OngoingCourseFrame from "./components/ongoing-course/OngoingCourseFrame";
+import CourseList from "./frames/CourseListFrame/CourseList";
+import OngoingCourseFrame from "./frames/OngoingCourseFrame/OngoingCourseFrame";
 
 const CourseScreen = () => {
     const selectedCourse = useAppStore(s => s.selectedCourse);

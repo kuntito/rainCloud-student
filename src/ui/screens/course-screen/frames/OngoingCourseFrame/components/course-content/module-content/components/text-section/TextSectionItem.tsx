@@ -1,6 +1,8 @@
 import { Text, VStack } from "@chakra-ui/react"
+import { TextSection } from "../../../../../../../../../../models/textSection"
 import TextSectionParagraphItem from "./TextSectionParagraphItem"
-import { TextSection } from "../../../../../models/textSection"
+
+
 
 interface Props {
     textSection: TextSection

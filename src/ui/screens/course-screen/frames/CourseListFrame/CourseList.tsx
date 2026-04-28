@@ -1,6 +1,6 @@
 import { Flex } from "@chakra-ui/react"
-import { Course } from "../../../../models/course"
-import ItemList from "../../../components/AppItemList"
+import { Course } from "../../../../../models/course"
+import ItemList from "../../../../components/AppItemList"
 import CourseItem from "./course-item/CourseItem"
 
 interface Props {

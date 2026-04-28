@@ -1,4 +1,4 @@
-import { dummyTextLS, dummyVideoLS, LectureSection } from "./lectureSection";
+import { dummyTextLS, dummyTextLSTwo, dummyVideoLS, LectureSection } from "./lectureSection";
 
 export interface Lecture {
     id: number;
@@ -10,7 +10,7 @@ export const dummyLecture: Lecture = {
     id: 0,
     lectureSections: [
         dummyTextLS,
-        dummyTextLS,
         dummyVideoLS,
+        dummyTextLSTwo,
     ]
 }

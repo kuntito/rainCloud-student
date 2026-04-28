@@ -1,4 +1,4 @@
-import { HStack, Text } from "@chakra-ui/react"
+import { HStack, Text } from "@chakra-ui/react";
 
 interface Props {
     moduleTitle: string;
@@ -7,11 +7,12 @@ interface Props {
 const ModuleHeader = ({ moduleTitle }: Props) => {
     return (
         <HStack
-            w={"100%"}
             justifyContent={"center"}
+            w={"100%"}
         >
             <Text
                 textStyle={"blaze"}
+                textAlign={"center"}
             >
                 {moduleTitle}
             </Text>

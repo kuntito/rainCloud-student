@@ -12,6 +12,8 @@ export const dummyModule: Module = {
     moduleTitle: "Foundations of AI and ML",
     lectures: [
         dummyLecture,
+        dummyLecture,
+        dummyLecture,
     ],
     currentLectureIndex: 0,
 }

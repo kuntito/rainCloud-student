@@ -16,6 +16,16 @@ export const dummyTextLS: LectureSection = {
     ]
 }
 
+export const dummyTextLSTwo: LectureSection = {
+    type: "text",
+    id: 0,
+    sectionTitle: "Why Models Need to Generalize",
+    paragraphs: [
+        "A model that memorizes its training data perfectly is not useful. What we want is generalization: good performance on new, unseen examples.",
+        "The gap between training performance and test performance is the first thing practitioners look at. A large gap usually means the model has learned noise rather than signal.",
+    ]
+}
+
 export const dummyVideoLS: LectureSection = {
     type: 'video',
     videoTitle: "A Visual Tour of Machine Learning",

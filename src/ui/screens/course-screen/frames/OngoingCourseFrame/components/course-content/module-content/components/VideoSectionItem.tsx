@@ -1,20 +1,22 @@
 import { VStack, Text, Box } from "@chakra-ui/react"
-import { VideoSection } from "../../../../../models/videoSection"
+import { VideoSection } from "../../../../../../../../../models/videoSection";
+
 
 interface Props {
-    video: VideoSection;
+    videoSection: VideoSection;
 }
 
-const VideoSectionItem = ({ video }: Props) => {
+const VideoSectionItem = ({ videoSection }: Props) => {
     return (
         <VStack
             align={"flex-start"}
             gap={"16px"}
+            w={"100%"}
         >
             <Text
                 textStyle={"orionSb"}
             >
-                {video.videoTitle}
+                {videoSection.videoTitle}
             </Text>
             <Box
                 borderRadius={"16px"}
@@ -22,7 +24,7 @@ const VideoSectionItem = ({ video }: Props) => {
                 w={"100%"}
             >
                 <video
-                    src={video.videoUrl}
+                    src={videoSection.videoUrl}
                     controls
                     width={"100%"}
                     height={"100%"}
