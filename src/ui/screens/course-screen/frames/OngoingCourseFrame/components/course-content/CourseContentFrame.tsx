@@ -1,12 +1,13 @@
-import { Flex } from "@chakra-ui/react"
+import { Flex, HStack } from "@chakra-ui/react"
 import { Course } from "../../../../../../../models/course"
 import ModuleContent from "./module-content/ModuleContent";
+import AppButton from "../../../../../../components/AppButton";
 
 interface Props {
     course: Course;
 }
 
-// TODO, maybe add the next-button here.
+
 const CourseContentFrame = ({ course }: Props) => {
     const currentModule = course.modules[course.currentModuleIndex];
 
@@ -31,6 +32,18 @@ const CourseContentFrame = ({ course }: Props) => {
                     md: "16px"
                 }}
             />
+            <HStack
+                w={"100%"}
+                pe={"32px"}
+                pb={{
+                    md: "16px"
+                }}
+                justifyContent={"end"}
+            >
+                <AppButton>
+                    next
+                </AppButton>
+            </HStack>
         </Flex>
     )
 }

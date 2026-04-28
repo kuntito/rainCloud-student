@@ -42,7 +42,7 @@ const LectureContent = ({ lecture, ...stackProps }: Props ) => {
                         ls
                     )
                 )}
-                <Box h={"32px"} />
+
             </VStack>
         </VStack>
     )
