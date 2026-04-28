@@ -1,22 +1,25 @@
-import { VStack, Text } from "@chakra-ui/react";
+import { VStack, StackProps, Text } from "@chakra-ui/react";
 import TextLsOverviewItem from "./TextLsOverviewItem";
 import VideoLSOverviewItem from "./VideoLSOverviewItem";
 import { Lecture } from "../../../../../../../../../models/lecture";
 import { LectureSection } from "../../../../../../../../../models/lectureSection";
 
-interface Props {
+interface Props extends StackProps {
     lectureOrder: number;
     lecture: Lecture;
 }
 
 const LectureOverviewItem = ({ 
     lectureOrder,
-    lecture
+    lecture,
+    ...stackProps
 }: Props) => {
+    
     return (
         <VStack
             align={"flex-start"}
             gap={"2px"}
+            {...stackProps}
         >
             <Text
                 textStyle={"onaregz"}

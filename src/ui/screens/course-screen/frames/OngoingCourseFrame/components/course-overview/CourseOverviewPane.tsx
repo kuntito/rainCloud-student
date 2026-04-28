@@ -14,9 +14,7 @@ const CourseOverviewPane = ({
     ...stackProps
 }: Props) => {
     return (
-        // TODO, make items clickable
-        // TODO, disable lectures after current lecture
-        // TODO, diable modules after current module
+        // TODO, make overview items clickable
         <VStack
             w={"256px"}
             h={"100%"}
@@ -38,6 +36,7 @@ const CourseOverviewPane = ({
                 px={"16px"}
                 flex={1}
                 overflowY={"auto"}
+                gap={"48px"}
                 sx={{
                     '&::-webkit-scrollbar': {
                         width: '4px',
@@ -56,6 +55,7 @@ const CourseOverviewPane = ({
                         key={idx}
                         moduleOrder={idx + 1}
                         module={module}
+                        opacity={course.currentModuleIndex >= idx ? 1 : 0.3}
                     />
                 )}
             </VStack>
