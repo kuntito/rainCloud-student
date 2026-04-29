@@ -1,23 +1,29 @@
-import { VStack, StackProps } from "@chakra-ui/react";
+import { VStack, StackProps, Box } from "@chakra-ui/react";
 import { Module, ModuleCheckpoint } from "../../../../../../../../models/module";
 import HeaderModuleOverviewItem from "./HeaderModuleOverviewItem";
 import LectureOverviewItem from "./lecture-section/LectureOverviewItem";
 import McqAssessmentOverviewItem from "./McqAssessmentOverviewItem";
+import useAppStore from "../../../../../../../../state-management/appStore";
 
 
 interface Props extends StackProps {
     moduleOrder: number;
     module: Module;
+    isModuleUnreached: boolean;
 }
 
 const ModuleOverviewItem = ({ 
     moduleOrder,
     module,
+    isModuleUnreached,
     ...stackProps
 }: Props) => {
     const lectureNumbers = getLectureNumbers(
         module.moduleCheckpoints
     );
+
+    const curModCptIdx = useAppStore(s => s.curModCptIdx);
+    if (curModCptIdx == null) return;
 
     return (
         <VStack
@@ -32,11 +38,17 @@ const ModuleOverviewItem = ({
                 gap={"16px"}
             >
                 {module.moduleCheckpoints.map((cpt, idx) => 
-                    renderOverviewModuleCheckpoint(
-                        idx,
-                        lectureNumbers[idx],
-                        cpt
-                    )
+                    <Box
+                        pointerEvents={idx > curModCptIdx ? "none" : "auto"}
+                        opacity={!isModuleUnreached && (idx > curModCptIdx) ? 0.3 : "auto"}
+                        w={"100%"}                
+                    >
+                        {renderOverviewModuleCheckpoint(
+                            idx,
+                            lectureNumbers[idx],
+                            cpt
+                        )}
+                    </Box>
                 )}
             </VStack>
         </VStack>

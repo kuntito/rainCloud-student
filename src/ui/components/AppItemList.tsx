@@ -26,8 +26,6 @@ const ItemList = <T,>({
     edgePadding = 4,
     ...stackProps
 }: Props<T>) => {
-    console.log(`edgePadding: ${edgePadding}`);
-    
     return (
         <VStack
             w={"100%"}

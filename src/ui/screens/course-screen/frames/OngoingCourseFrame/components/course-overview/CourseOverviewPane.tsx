@@ -1,9 +1,10 @@
-import { HStack, StackProps, VStack } from "@chakra-ui/react"
-import { CloseIcon } from "../../../../../../components/appIcons/CloseIcon"
+import { Box, HStack, StackProps, VStack } from "@chakra-ui/react"
 import { Course, CourseCheckpoint } from "../../../../../../../models/course"
-import ModuleOverviewItem from "./components/ModuleOverviewItem"
+import useAppStore from "../../../../../../../state-management/appStore"
 import AppIconButton from "../../../../../../components/AppIconButton"
+import { CloseIcon } from "../../../../../../components/appIcons/CloseIcon"
 import McqAssessmentOverviewItem from "./components/McqAssessmentOverviewItem"
+import ModuleOverviewItem from "./components/ModuleOverviewItem"
 
 
 interface Props extends StackProps {
@@ -17,6 +18,9 @@ const CourseOverviewPane = ({
     const moduleNumbers = getModuleNumbers(
         course.courseCheckpoints
     );
+
+    const curCourseCptIdx = useAppStore(s => s.curCourseCptIdx);
+    if (curCourseCptIdx == null) return;
 
     return (
         // TODO, make overview items clickable
@@ -56,11 +60,20 @@ const CourseOverviewPane = ({
                 }}
             >
                 {course.courseCheckpoints.map((cpt, idx) => 
-                    renderOverviewCourseCheckpoint(
-                        idx,
-                        moduleNumbers[idx],
-                        cpt,
-                    )
+                    <Box
+                        pointerEvents={idx > curCourseCptIdx ? "none" : "auto"}
+                        opacity={idx > curCourseCptIdx ? 0.1 : "auto"}
+                        w={"100%"}
+                    >
+                        {
+                            renderOverviewCourseCheckpoint(
+                                idx,
+                                moduleNumbers[idx],
+                                cpt,
+                                idx > curCourseCptIdx,
+                            )
+                        }
+                    </Box>
                 )}
             </VStack>
         </VStack>
@@ -82,6 +95,7 @@ const renderOverviewCourseCheckpoint = (
     key: number,
     moduleOrder: number,
     cpt: CourseCheckpoint,
+    isModuleUnreached: boolean,
 ) => {
     switch (cpt.type) {
         case 'module':
@@ -89,8 +103,9 @@ const renderOverviewCourseCheckpoint = (
                 key={key}
                 moduleOrder={moduleOrder}
                 module={cpt.data}
+                isModuleUnreached={isModuleUnreached}
             />
-        case 'mcq':
+        case 'mcq':    
             return <McqAssessmentOverviewItem
                 key={key}
                 mcq={cpt.data}

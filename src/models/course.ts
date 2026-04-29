@@ -22,6 +22,7 @@ export const dummyCourse: Course = {
     ],
     courseCheckpoints: [
         { type: "module", data: dummyModule },
+        { type: "module", data: dummyModule },
         { type: "mcq", data: dummyCourseAssessment },
     ],
 }
