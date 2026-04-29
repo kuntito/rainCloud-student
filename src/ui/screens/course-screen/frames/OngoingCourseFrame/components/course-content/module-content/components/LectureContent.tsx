@@ -3,6 +3,8 @@ import { Lecture } from "../../../../../../../../../models/lecture";
 import { LectureSection } from "../../../../../../../../../models/lectureSection";
 import VideoSectionItem from "./VideoSectionItem";
 import TextSectionItem from "./text-section/TextSectionItem";
+import { dummyMcqAssessment } from "../../../../../../../../../models/mcqAssessment";
+import McqAssessmentFrame from "../../../../../McqAssessment/McqAssessmentFrame";
 
 interface Props extends StackProps {
     lecture: Lecture;
@@ -42,7 +44,6 @@ const LectureContent = ({ lecture, ...stackProps }: Props ) => {
                         ls
                     )
                 )}
-
             </VStack>
         </VStack>
     )

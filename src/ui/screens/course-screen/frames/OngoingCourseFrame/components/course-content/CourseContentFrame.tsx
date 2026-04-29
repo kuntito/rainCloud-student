@@ -1,7 +1,10 @@
 import { Flex, HStack } from "@chakra-ui/react"
-import { Course } from "../../../../../../../models/course"
+import { Course, CourseCheckpoint } from "../../../../../../../models/course"
 import ModuleContent from "./module-content/ModuleContent";
 import AppButton from "../../../../../../components/AppButton";
+import McqAssessmentFrame from "../../../McqAssessment/McqAssessmentFrame";
+import { dummyMcqAssessment } from "../../../../../../../models/mcqAssessment";
+import useAppStore from "../../../../../../../state-management/appStore";
 
 interface Props {
     course: Course;
@@ -9,7 +12,11 @@ interface Props {
 
 
 const CourseContentFrame = ({ course }: Props) => {
-    const currentModule = course.modules[course.currentModuleIndex];
+    const courseCheckpointIndex = useAppStore(s => s.curCourseCptIdx);
+    if (courseCheckpointIndex == null)
+        return;
+
+    const courseCheckpoint = course.courseCheckpoints[courseCheckpointIndex];
 
     return (
         <Flex
@@ -22,26 +29,26 @@ const CourseContentFrame = ({ course }: Props) => {
             maxW={"928px"}
             flexDirection={"column"}
             align={"center"}
+            pt={{
+                md: "16px"
+            }}
+            px={{
+                md: "16px"
+            }}
         >
-            <ModuleContent 
-                module={currentModule}
-                pt={{
-                    md: "16px"
-                }}
-                px={{
-                    md: "16px"
-                }}
-            />
+
+            {renderCourseCheckpoint(courseCheckpoint)}
             <HStack
                 w={"100%"}
                 pe={"32px"}
+                pt={"16px"}
                 pb={{
                     md: "16px"
                 }}
-                justifyContent={"end"}
+                justifyContent={courseCheckpoint.type === 'mcq'? "center" : "end"}
             >
                 <AppButton>
-                    next
+                    {courseCheckpoint.type === 'mcq' ? 'submit' : 'next'}
                 </AppButton>
             </HStack>
         </Flex>
@@ -49,3 +56,16 @@ const CourseContentFrame = ({ course }: Props) => {
 }
 
 export default CourseContentFrame
+
+const renderCourseCheckpoint = (cpt: CourseCheckpoint) => {
+    switch (cpt.type) {
+        case 'module':
+            return <ModuleContent 
+                module={cpt.data}
+            />;
+        case 'mcq':
+            return <McqAssessmentFrame
+                mcqAssessment={cpt.data}
+            />;
+    }
+}

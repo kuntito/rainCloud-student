@@ -1,19 +1,21 @@
 import { dummyLecture, Lecture } from "./lecture";
-import { McqAssessment } from "./mcqAssessment";
+import { dummyMcqAssessment, McqAssessment } from "./mcqAssessment";
 
 export interface Module {
     moduleTitle: string;
-    lectures: Lecture[];
-    currentLectureIndex: number;
-    mcqAssessment?: McqAssessment;
+    moduleCheckpoints: ModuleCheckpoint[];
 }
+
+export type ModuleCheckpoint = 
+    | { type: "lecture"; data: Lecture }
+    | { type: "mcq"; data: McqAssessment };
+
 
 export const dummyModule: Module = {
     moduleTitle: "Foundations of AI and ML",
-    lectures: [
-        dummyLecture,
-        dummyLecture,
-        dummyLecture,
-    ],
-    currentLectureIndex: 0,
+    moduleCheckpoints: [
+        { type: "lecture", data: dummyLecture },
+        { type: "mcq", data: dummyMcqAssessment },
+        { type: "lecture", data: dummyLecture },
+    ]
 }

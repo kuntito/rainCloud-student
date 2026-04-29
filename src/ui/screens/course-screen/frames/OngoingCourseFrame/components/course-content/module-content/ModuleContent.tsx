@@ -1,7 +1,10 @@
 import { Flex, FlexProps } from "@chakra-ui/react";
-import { Module } from "../../../../../../../../models/module";
+import { Module, ModuleCheckpoint } from "../../../../../../../../models/module";
 import LectureContent from "./components/LectureContent";
 import ModuleHeader from "./components/ModuleHeader";
+import useAppStore from "../../../../../../../../state-management/appStore";
+import { useEffect } from "react";
+import McqAssessmentFrame from "../../../../McqAssessment/McqAssessmentFrame";
 
 
 interface Props extends FlexProps {
@@ -10,7 +13,16 @@ interface Props extends FlexProps {
 
 const ModuleContent = ({ module, ...flexProps }: Props) => {
 
-    const currentLecture = module.lectures[module.currentLectureIndex];
+    const setupModule = useAppStore(s => s.setupModule);
+    useEffect(() => {
+        setupModule(module)
+    }, []);
+
+    const modCptIdx = useAppStore(s => s.curModCptIdx);
+    if (modCptIdx == null)
+        return;
+
+    const moduleCheckpoint = module.moduleCheckpoints[modCptIdx];
 
     return (
         <Flex
@@ -21,15 +33,27 @@ const ModuleContent = ({ module, ...flexProps }: Props) => {
             gap={"24px"}
             overflow={"hidden"}
             {...flexProps}
-            pb={"32px"}
         >
             <ModuleHeader moduleTitle={module.moduleTitle} />
-            <LectureContent
-                lecture={currentLecture} 
-                
-            />
+            {renderModuleCheckpoint(moduleCheckpoint)}
         </Flex>
     )
 }
 
 export default ModuleContent
+
+
+const renderModuleCheckpoint = (
+    moduleCheckpoint: ModuleCheckpoint
+) => {
+    switch (moduleCheckpoint.type) {
+        case 'lecture':
+            return <LectureContent
+                lecture={moduleCheckpoint.data}
+            />
+        case 'mcq':
+            return <McqAssessmentFrame
+                mcqAssessment={moduleCheckpoint.data}
+            />
+    }
+}

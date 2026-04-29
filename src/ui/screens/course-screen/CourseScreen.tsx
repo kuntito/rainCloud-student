@@ -3,6 +3,8 @@ import AppHeader from "../../components/AppHeader"
 import useAppStore from "../../../state-management/appStore"
 import CourseList from "./frames/CourseListFrame/CourseList";
 import OngoingCourseFrame from "./frames/OngoingCourseFrame/OngoingCourseFrame";
+import McqAssessmentFrame from "./frames/McqAssessment/McqAssessmentFrame";
+import { dummyMcqAssessment } from "../../../models/mcqAssessment";
 
 const CourseScreen = () => {
     const selectedCourse = useAppStore(s => s.selectedCourse);
@@ -28,7 +30,7 @@ const CourseScreen = () => {
                     selectedCourse 
                         ? <OngoingCourseFrame course={selectedCourse} />
                         : <CourseList courses={courses} />
-                    }
+                }
                 
             </Flex>
         </VStack>

@@ -1,14 +1,22 @@
 import { create } from "zustand";
 import { Course, dummyCourse } from "../models/course";
+import { Module } from "../models/module";
 
 interface AppStore {
     selectedCourse: Course | null;
+    curCourseCptIdx: number | null;
+    setupModule: (module: Module) => void;
+    curModCptIdx: number | null;
     getCourses: () => Course[];
     startCourse: (courseId: number) => void;
 }
 
 const useAppStore = create<AppStore>((set, get) => {
     const selectedCourse: Course | null = null;
+    const curCourseCptIdx = null;
+
+    const curModCptIdx = null;
+
     const getCourses = (): Course[] => {
         return [
             dummyCourse,
@@ -22,13 +30,25 @@ const useAppStore = create<AppStore>((set, get) => {
         const allCourses = get().getCourses();
         const course = allCourses.find(x => x.id === courseId);
 
-        set({
-            selectedCourse: course ?? null
-        })
+        if (course != null) {
+            set({
+                selectedCourse: course,
+                curCourseCptIdx: course.courseCheckpoints.length > 0 ? 0 : null
+            })
+        }
     }
     
+    const setupModule = (module: Module) => {
+        set({
+            curModCptIdx: module.moduleCheckpoints.length > 0 ? 0 : null
+        })
+    }
+
     return {
         selectedCourse: selectedCourse,
+        curCourseCptIdx: curCourseCptIdx,
+        setupModule: setupModule,
+        curModCptIdx: curModCptIdx,
         getCourses: getCourses,
         startCourse: startCourse,
     }
