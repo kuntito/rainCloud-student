@@ -9,18 +9,21 @@ import useAppStore from "../../../../../../../../state-management/appStore";
 interface Props extends StackProps {
     moduleOrder: number;
     module: Module;
-    isModuleUnreached: boolean;
+    itemCourseCheckpointIdx: number;
 }
 
 const ModuleOverviewItem = ({ 
     moduleOrder,
     module,
-    isModuleUnreached,
+    itemCourseCheckpointIdx,
     ...stackProps
 }: Props) => {
     const lectureNumbers = getLectureNumbers(
         module.moduleCheckpoints
     );
+
+    const curCourseCptIdx = useAppStore(s => s.curCourseCptIdx);
+    if (curCourseCptIdx == null) return;
 
     const curModCptIdx = useAppStore(s => s.curModCptIdx);
     if (curModCptIdx == null) return;
@@ -37,16 +40,21 @@ const ModuleOverviewItem = ({
             <VStack
                 gap={"16px"}
             >
-                {module.moduleCheckpoints.map((cpt, idx) => 
+                {module.moduleCheckpoints.map((modCpt, modCptIdx) => 
                     <Box
-                        pointerEvents={idx > curModCptIdx ? "none" : "auto"}
-                        opacity={!isModuleUnreached && (idx > curModCptIdx) ? 0.3 : "auto"}
+                        pointerEvents={modCptIdx > curModCptIdx ? "none" : "auto"}
+                        opacity={resolveModuleOverviewOpacity(
+                            itemCourseCheckpointIdx,
+                            curCourseCptIdx,
+                            modCptIdx,
+                            curModCptIdx
+                        )}
                         w={"100%"}                
                     >
                         {renderOverviewModuleCheckpoint(
-                            idx,
-                            lectureNumbers[idx],
-                            cpt
+                            modCptIdx,
+                            lectureNumbers[modCptIdx],
+                            modCpt
                         )}
                     </Box>
                 )}
@@ -125,4 +133,27 @@ const getLectureNumbers = (
     }
 
     return lectureNumbers;
+}
+
+// TODO docstring
+const resolveModuleOverviewOpacity = (
+    itemCourseCptIdx: number,
+    curCourseCptIdx: number,
+    itemModCptIdx: number,
+    curModCptIdx: number,    
+):string => {
+    // if i haven't reached the course check point
+    // don't touch the opacity
+    // it's assumed, the opacity has been dimmed at the course overview level
+    // dimming it again would further reduce the already dimmed opacity
+    if (itemCourseCptIdx > curCourseCptIdx)
+        return "auto";
+
+    // if we are at current course checkpoint
+    // the entire component is visible but we still want to hide unreached modules
+    if (itemCourseCptIdx === curCourseCptIdx) {
+        return itemModCptIdx > curModCptIdx ? "0.3" : "auto"
+    }
+
+    return "auto";
 }

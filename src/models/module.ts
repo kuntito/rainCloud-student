@@ -1,4 +1,4 @@
-import { dummyLecture, Lecture } from "./lecture";
+import { dummyLecture, dummyLectureMas, Lecture } from "./lecture";
 import { dummyMcqAssessment, McqAssessment } from "./mcqAssessment";
 
 export interface Module {
@@ -17,5 +17,13 @@ export const dummyModule: Module = {
         { type: "lecture", data: dummyLecture },
         { type: "mcq", data: dummyMcqAssessment },
         { type: "lecture", data: dummyLecture },
+    ]
+}
+
+
+export const dummyModuleTwo: Module = {
+    moduleTitle: "Training and Evaluating a Model",
+    moduleCheckpoints: [
+        { type: "lecture", data: dummyLectureMas },
     ]
 }

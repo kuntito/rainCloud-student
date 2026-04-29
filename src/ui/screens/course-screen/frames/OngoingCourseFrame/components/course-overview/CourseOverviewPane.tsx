@@ -62,7 +62,7 @@ const CourseOverviewPane = ({
                 {course.courseCheckpoints.map((cpt, idx) => 
                     <Box
                         pointerEvents={idx > curCourseCptIdx ? "none" : "auto"}
-                        opacity={idx > curCourseCptIdx ? 0.1 : "auto"}
+                        opacity={idx > curCourseCptIdx ? 0.3 : "auto"}
                         w={"100%"}
                     >
                         {
@@ -70,7 +70,7 @@ const CourseOverviewPane = ({
                                 idx,
                                 moduleNumbers[idx],
                                 cpt,
-                                idx > curCourseCptIdx,
+                                idx,
                             )
                         }
                     </Box>
@@ -95,7 +95,7 @@ const renderOverviewCourseCheckpoint = (
     key: number,
     moduleOrder: number,
     cpt: CourseCheckpoint,
-    isModuleUnreached: boolean,
+    courseCptIdx: number,
 ) => {
     switch (cpt.type) {
         case 'module':
@@ -103,7 +103,7 @@ const renderOverviewCourseCheckpoint = (
                 key={key}
                 moduleOrder={moduleOrder}
                 module={cpt.data}
-                isModuleUnreached={isModuleUnreached}
+                itemCourseCheckpointIdx={courseCptIdx}
             />
         case 'mcq':    
             return <McqAssessmentOverviewItem

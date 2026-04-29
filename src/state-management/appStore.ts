@@ -9,6 +9,7 @@ interface AppStore {
     curModCptIdx: number | null;
     getCourses: () => Course[];
     startCourse: (courseId: number) => void;
+    nextCourseCheckpoint: () => void;
 }
 
 const useAppStore = create<AppStore>((set, get) => {
@@ -44,6 +45,10 @@ const useAppStore = create<AppStore>((set, get) => {
         })
     }
 
+    const nextCourseCheckpoint = () => {
+
+    }
+
     return {
         selectedCourse: selectedCourse,
         curCourseCptIdx: curCourseCptIdx,
@@ -51,6 +56,7 @@ const useAppStore = create<AppStore>((set, get) => {
         curModCptIdx: curModCptIdx,
         getCourses: getCourses,
         startCourse: startCourse,
+        nextCourseCheckpoint: nextCourseCheckpoint,
     }
 })
 

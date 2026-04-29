@@ -1,5 +1,5 @@
 import { dummyCourseAssessment, dummyMcqAssessment, McqAssessment } from "./mcqAssessment";
-import { dummyModule, Module } from "./module";
+import { dummyModule, dummyModuleTwo, Module } from "./module";
 
 export interface Course {
     id: number;
@@ -22,7 +22,7 @@ export const dummyCourse: Course = {
     ],
     courseCheckpoints: [
         { type: "module", data: dummyModule },
-        { type: "module", data: dummyModule },
+        { type: "module", data: dummyModuleTwo },
         { type: "mcq", data: dummyCourseAssessment },
     ],
 }
