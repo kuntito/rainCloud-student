@@ -20,7 +20,7 @@ const CourseContentFrame = ({
 
     const courseCheckpointIndex = useAppStore(s => s.curCourseCptIdx);
     if (courseCheckpointIndex == null)
-        return;
+        return null;
 
 
     const courseCheckpoint = course.courseCheckpoints[courseCheckpointIndex];

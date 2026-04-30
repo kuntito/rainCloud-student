@@ -20,7 +20,7 @@ const CourseOverviewPane = ({
     );
 
     const curCourseCptIdx = useAppStore(s => s.curCourseCptIdx);
-    if (curCourseCptIdx == null) return;
+    if (curCourseCptIdx == null) return null;
 
     return (
         // TODO, make overview items clickable

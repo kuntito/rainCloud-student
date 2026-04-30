@@ -20,7 +20,7 @@ const ModuleContent = ({ module, ...flexProps }: Props) => {
 
     const modCptIdx = useAppStore(s => s.curModCptIdx);
     if (modCptIdx == null)
-        return;
+        return null;
 
     const moduleCheckpoint = module.moduleCheckpoints[modCptIdx];
 

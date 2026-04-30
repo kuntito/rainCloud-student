@@ -23,10 +23,10 @@ const ModuleOverviewItem = ({
     );
 
     const curCourseCptIdx = useAppStore(s => s.curCourseCptIdx);
-    if (curCourseCptIdx == null) return;
+    if (curCourseCptIdx == null) return null;
 
     const curModCptIdx = useAppStore(s => s.curModCptIdx);
-    if (curModCptIdx == null) return;
+    if (curModCptIdx == null) return null;
 
     return (
         <VStack
