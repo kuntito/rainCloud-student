@@ -61,13 +61,13 @@ const CourseOverviewPane = ({
             >
                 {course.courseCheckpoints.map((cpt, idx) => 
                     <Box
+                        key={idx}
                         pointerEvents={idx > curCourseCptIdx ? "none" : "auto"}
                         opacity={idx > curCourseCptIdx ? 0.3 : "auto"}
                         w={"100%"}
                     >
                         {
                             renderOverviewCourseCheckpoint(
-                                idx,
                                 moduleNumbers[idx],
                                 cpt,
                                 idx,
@@ -92,7 +92,6 @@ export default CourseOverviewPane
 // define a type that includes derived info like `moduleOrder`,
 // then pass that enriched type to this method instead.
 const renderOverviewCourseCheckpoint = (
-    key: number,
     moduleOrder: number,
     cpt: CourseCheckpoint,
     courseCptIdx: number,
@@ -100,14 +99,12 @@ const renderOverviewCourseCheckpoint = (
     switch (cpt.type) {
         case 'module':
             return <ModuleOverviewItem
-                key={key}
                 moduleOrder={moduleOrder}
                 module={cpt.data}
                 itemCourseCheckpointIdx={courseCptIdx}
             />
         case 'mcq':    
             return <McqAssessmentOverviewItem
-                key={key}
                 mcq={cpt.data}
             />
     }

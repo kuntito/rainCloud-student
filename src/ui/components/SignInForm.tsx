@@ -2,7 +2,13 @@ import { VStack } from "@chakra-ui/react"
 import AppInputWithLabel from "./AppInputWithLabel"
 import AppButton from "./AppButton"
 
-const SignInForm = () => {
+interface Props {
+    onSignInClick: () => void;
+}
+
+const SignInForm = ({
+    onSignInClick
+}: Props) => {
     return (
         <VStack
             w={"282px"}
@@ -15,7 +21,9 @@ const SignInForm = () => {
                 <AppInputWithLabel label="your id" />
                 <AppInputWithLabel label="password" type="password"/>
             </VStack>
-            <AppButton>
+            <AppButton
+                onClick={onSignInClick}
+            >
                 sign in
             </AppButton>
         </VStack>

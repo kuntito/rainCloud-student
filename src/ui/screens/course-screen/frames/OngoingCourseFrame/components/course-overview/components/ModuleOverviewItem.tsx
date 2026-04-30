@@ -42,6 +42,7 @@ const ModuleOverviewItem = ({
             >
                 {module.moduleCheckpoints.map((modCpt, modCptIdx) => 
                     <Box
+                        key={modCptIdx}
                         pointerEvents={modCptIdx > curModCptIdx ? "none" : "auto"}
                         opacity={resolveModuleOverviewOpacity(
                             itemCourseCheckpointIdx,
@@ -52,7 +53,6 @@ const ModuleOverviewItem = ({
                         w={"100%"}                
                     >
                         {renderOverviewModuleCheckpoint(
-                            modCptIdx,
                             lectureNumbers[modCptIdx],
                             modCpt
                         )}
@@ -75,20 +75,17 @@ export default ModuleOverviewItem
 // define a type that includes derived info like `lectureOrder`,
 // then pass that enriched type to this method instead.
 const renderOverviewModuleCheckpoint = (
-    key: number,
     lectureOrder: number,
     cpt: ModuleCheckpoint
 ) => {
     switch(cpt.type) {
         case 'lecture':
             return <LectureOverviewItem
-                key={key}
                 lectureOrder={lectureOrder}
                 lecture={cpt.data}
             />
         case 'mcq':
             return <McqAssessmentOverviewItem
-                key={key}
                 mcq={cpt.data}
             />
     }

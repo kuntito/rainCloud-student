@@ -8,15 +8,25 @@ import useAppStore from "../../../../../../../state-management/appStore";
 
 interface Props {
     course: Course;
+    goToHomeScreen: () => void;
 }
 
 
-const CourseContentFrame = ({ course }: Props) => {
+const CourseContentFrame = ({ 
+    course,
+    goToHomeScreen,
+}: Props) => {
+    const nextCourseCheckpoint = useAppStore(s => s.nextCourseCheckpoint);
+
     const courseCheckpointIndex = useAppStore(s => s.curCourseCptIdx);
     if (courseCheckpointIndex == null)
         return;
 
+
     const courseCheckpoint = course.courseCheckpoints[courseCheckpointIndex];
+
+    // TODO remove this, replace with relevant impl
+    const onActionButtonClick = courseCheckpoint.type == 'module' ? nextCourseCheckpoint : goToHomeScreen
 
     return (
         <Flex
@@ -47,7 +57,10 @@ const CourseContentFrame = ({ course }: Props) => {
                 }}
                 justifyContent={courseCheckpoint.type === 'mcq'? "center" : "end"}
             >
-                <AppButton>
+                {/* TODO this button only checks for assessment on course level not module level also */}
+                <AppButton
+                    onClick={onActionButtonClick}
+                >
                     {courseCheckpoint.type === 'mcq' ? 'submit' : 'next'}
                 </AppButton>
             </HStack>

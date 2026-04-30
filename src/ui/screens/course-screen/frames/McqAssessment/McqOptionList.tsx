@@ -13,8 +13,13 @@ const McqOptionList = ({ options }: Props) => {
             value=""
         >
             <Stack>
-                {options.map(opt => 
-                    <Radio value="1">{opt.text}</Radio>
+                {options.map((opt, idx) => 
+                    <Radio 
+                        value="1"
+                        key={idx}
+                    >
+                        {opt.text}
+                    </Radio>
                 )}
             </Stack>
         </RadioGroup>

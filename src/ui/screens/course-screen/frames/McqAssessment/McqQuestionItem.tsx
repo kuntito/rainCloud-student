@@ -20,6 +20,9 @@ const McqQuestionItem = ({
             <HStack
                 gap={"16px"}
                 align={"start"}
+                pe={{
+                    base: "16px"
+                }}
             >
                 <Text>{questionOrder}.</Text>
                 <Text>{mcqQuestion.questionText}</Text>

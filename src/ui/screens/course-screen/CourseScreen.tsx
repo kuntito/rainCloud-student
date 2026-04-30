@@ -6,7 +6,13 @@ import OngoingCourseFrame from "./frames/OngoingCourseFrame/OngoingCourseFrame";
 import McqAssessmentFrame from "./frames/McqAssessment/McqAssessmentFrame";
 import { dummyMcqAssessment } from "../../../models/mcqAssessment";
 
-const CourseScreen = () => {
+interface Props {
+    goToHomeScreen: () => void;
+}
+
+const CourseScreen = ({
+    goToHomeScreen
+}: Props) => {
     const selectedCourse = useAppStore(s => s.selectedCourse);
     const getCourses = useAppStore(s => s.getCourses);
 
@@ -28,7 +34,10 @@ const CourseScreen = () => {
             >
                 {
                     selectedCourse 
-                        ? <OngoingCourseFrame course={selectedCourse} />
+                        ? <OngoingCourseFrame
+                            course={selectedCourse}
+                            goToHomeScreen={goToHomeScreen}
+                        />
                         : <CourseList courses={courses} />
                 }
                 

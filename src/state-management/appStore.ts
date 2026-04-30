@@ -10,6 +10,7 @@ interface AppStore {
     getCourses: () => Course[];
     startCourse: (courseId: number) => void;
     nextCourseCheckpoint: () => void;
+    resetCourseProgress: () => void;
 }
 
 const useAppStore = create<AppStore>((set, get) => {
@@ -46,7 +47,41 @@ const useAppStore = create<AppStore>((set, get) => {
     }
 
     const nextCourseCheckpoint = () => {
+        // what should the next button do?
+        // always go to the next module
+        // if there is none, go to the next course check point
+        const curCourse = get().selectedCourse;
+        if (curCourse == null) return;
+        
+        const curCourseCptIdx = get().curCourseCptIdx;
+        if (curCourseCptIdx == null) return;
 
+        const curModCptIdx = get().curModCptIdx;
+        if (curModCptIdx == null) return;
+
+        const curModule = curCourse.courseCheckpoints[curCourseCptIdx] as { type: "module"; data: Module };
+        const isNextModule = curModCptIdx + 1 < curModule.data.moduleCheckpoints.length;
+        if (isNextModule) {
+            set({
+                curModCptIdx: curModCptIdx + 1
+            })
+        } else {
+            const isNextCourseItem = curCourseCptIdx + 1 < curCourse.courseCheckpoints.length;
+            if (isNextCourseItem) {
+                set({
+                    curCourseCptIdx: curCourseCptIdx + 1,
+                    curModCptIdx: 0,
+                })
+            }
+        }
+    }
+
+    const resetCourseProgress = () => {
+        set({
+            curModCptIdx: null,
+            curCourseCptIdx: null,
+            selectedCourse: null,
+        })
     }
 
     return {
@@ -57,6 +92,7 @@ const useAppStore = create<AppStore>((set, get) => {
         getCourses: getCourses,
         startCourse: startCourse,
         nextCourseCheckpoint: nextCourseCheckpoint,
+        resetCourseProgress: resetCourseProgress,
     }
 })
 

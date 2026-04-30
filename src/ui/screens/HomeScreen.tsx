@@ -1,7 +1,13 @@
 import { Box, VStack, Image, Flex } from "@chakra-ui/react"
 import SignInForm from "../components/SignInForm"
 
-const HomeScreen = () => {
+interface Props {
+    onSignInClick: () => void;
+}
+
+const HomeScreen = ({
+    onSignInClick
+}: Props) => {
     return (
         <Flex
             w={"100vw"}
@@ -34,7 +40,7 @@ const HomeScreen = () => {
                 justifyContent={"center"}
                 pt={"24px"}
             >
-                <SignInForm />
+                <SignInForm onSignInClick={onSignInClick} />
             </VStack>
         </Flex>
     )

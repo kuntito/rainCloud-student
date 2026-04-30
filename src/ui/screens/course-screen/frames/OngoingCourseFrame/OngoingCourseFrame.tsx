@@ -5,10 +5,14 @@ import CourseOverviewPane from "./components/course-overview/CourseOverviewPane"
 
 
 interface Props {
-    course: Course
+    course: Course,
+    goToHomeScreen: () => void;
 }
 
-const OngoingCourseFrame = ({ course }: Props) => {
+const OngoingCourseFrame = ({ 
+    course,
+    goToHomeScreen,
+}: Props) => {
     return (
         <HStack
             overflow={"hidden"}
@@ -25,7 +29,10 @@ const OngoingCourseFrame = ({ course }: Props) => {
                     md: "flex"
                 }}
             />
-            <CourseContentFrame course={course} />
+            <CourseContentFrame
+                course={course}
+                goToHomeScreen={goToHomeScreen}
+            />
         </HStack>
     )
 }
