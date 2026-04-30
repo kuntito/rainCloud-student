@@ -8,11 +8,13 @@ import ModuleOverviewItem from "./components/ModuleOverviewItem"
 
 
 interface Props extends StackProps {
-    course: Course
+    course: Course;
+    onClosePaneClick: () => void;
 }
 
 const CourseOverviewPane = ({ 
     course,
+    onClosePaneClick,
     ...stackProps
 }: Props) => {
     const moduleNumbers = getModuleNumbers(
@@ -25,7 +27,10 @@ const CourseOverviewPane = ({
     return (
         // TODO, make overview items clickable
         <VStack
-            w={"256px"}
+            w={{
+                base: "100%",
+                md: "256px"
+            }}
             h={"100%"}
             borderRadius={"16px"}
             pt={"16px"}
@@ -38,7 +43,7 @@ const CourseOverviewPane = ({
                 <AppIconButton
                     icon={<CloseIcon />}
                     iconColor="palette.esp"
-                    onClick={() => {}}
+                    onClick={onClosePaneClick}
                 />
             </HStack>
             <VStack

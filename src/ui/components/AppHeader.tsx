@@ -3,8 +3,13 @@ import AppIconButton from "./AppIconButton"
 import { ThreeStacksMenuIcon } from "./appIcons/ThreeStacksMenuIcon"
 import { PersonIcon } from "./appIcons/PersonIcon"
 
-const AppHeader = () => {
-    const onHeaderMenuClick = () => {}
+interface Props {
+    onMenuClick: () => void;
+}
+
+const AppHeader = ({
+    onMenuClick
+}: Props) => {
     const onPersonProfileClick = () => {}
 
     return (
@@ -25,7 +30,7 @@ const AppHeader = () => {
                 <AppIconButton
                     icon={<ThreeStacksMenuIcon />}
                     iconColor="palette.arduino"
-                    onClick={onHeaderMenuClick}
+                    onClick={onMenuClick}
                 />
             </Box>
             <Image
